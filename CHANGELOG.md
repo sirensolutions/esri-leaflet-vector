@@ -5,6 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+## [3.1.3-siren-v1] - 2022-08-03
+
+### Fixed
+* Added option to handle errors from improperly written ids ([#1](https://github.com/sirensolutions/esri-leaflet-vector/pull/1))
+* Added option to pass custom baseUrl ([#1](https://github.com/sirensolutions/esri-leaflet-vector/pull/1))
+* Added option to pass custom stylPath ([#1](https://github.com/sirensolutions/esri-leaflet-vector/pull/1))
+
 ## [3.1.3] - 2022-05-23
 
 ### Fixed
