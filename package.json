@@ -1,5 +1,5 @@
 {
-  "name": "esri-leaflet-vector",
+  "name": "sirensolutions-esri-leaflet-vector",
   "description": "Esri vector basemap and vector tile layer plugin for Leaflet.",
   "version": "3.1.3-siren-v1",
   "author": "John Gravois (https://johngravois.com)",
@@ -9,7 +9,7 @@
     "Jacob Wasilkowski (https://jwasilgeo.github.io)"
   ],
   "bugs": {
-    "url": "https://github.com/Esri/esri-leaflet-vector/issues"
+    "url": "https://github.com/sirensolutions/esri-leaflet-vector/issues"
   },
   "dependencies": {
     "mapbox-gl": "1.13.1"
@@ -59,7 +59,7 @@
     "dist/*.js.map",
     "dist/*.json"
   ],
-  "homepage": "https://github.com/Esri/esri-leaflet-vector#readme",
+  "homepage": "https://github.com/sirensolutions/esri-leaflet-vector#readme",
   "jsnext:main": "src/EsriLeafletVector.js",
   "jspm": {
     "registry": "npm",
@@ -74,7 +74,7 @@
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Esri/esri-leaflet-vector.git"
+    "url": "git+https://github.com/sirensolutions/esri-leaflet-vector"
   },
   "scripts": {
     "prebuild": "mkdirp dist",
