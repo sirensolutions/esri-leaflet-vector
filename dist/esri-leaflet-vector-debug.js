@@ -1,4 +1,4 @@
-/* esri-leaflet-vector - v3.1.3-siren-v1 - Wed Aug 03 2022 12:10:28 GMT+0100 (British Summer Time)
+/* sirensolutions-esri-leaflet-vector - v3.1.4-siren-1 - Wed Aug 17 2022 13:49:01 GMT+0100 (British Summer Time)
  * Copyright (c) 2022 Environmental Systems Research Institute, Inc.
  * Apache-2.0 */
 (function (global, factory) {
@@ -11,7 +11,7 @@
 
   var mapboxgl__default = /*#__PURE__*/_interopDefaultLegacy(mapboxgl);
 
-  var version = "3.1.3-siren-v1";
+  var version = "3.1.4-siren-1";
 
   /*
     utility to establish a URL for the basemap styles API
@@ -735,6 +735,10 @@
 
     _asyncAdd: function () {
       var map = this._map;
+      // If the layer was removed, this._map will be null
+      if (map === null) {
+        return;
+      }
       map.on('moveend', esriLeaflet.Util._updateMapAttribution);
       this._mapboxGL.addTo(map, this);
     }
@@ -816,6 +820,15 @@
             }
           }
 
+          if (!style.sources) {
+            if (this.options.errorCallback) {
+              this.options.errorCallback('incorrect style path detected');
+              return;
+            } else {
+              throw new Error('incorrect style path detected');
+            }
+          }
+
           if (!isWebMercator(service.tileInfo.spatialReference.wkid)) {
             console.warn(
               'This layer is not guaranteed to display properly because its service does not use the Web Mercator projection. The "tileInfo.spatialReference" property is:',
@@ -881,6 +894,12 @@
 
     _asyncAdd: function () {
       var map = this._map;
+
+      // If the layer was removed, this._map will be null
+      if (map === null) {
+        return;
+      }
+
       this._mapboxGL.addTo(map, this);
     }
   });
