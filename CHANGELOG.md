@@ -5,12 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
-## [3.1.3-siren-v1] - 2022-08-03
+## [3.1.4-siren-1] - 2022-08-03
 
 ### Fixed
 * Added option to handle errors from improperly written ids ([#1](https://github.com/sirensolutions/esri-leaflet-vector/pull/1))
 * Added option to pass custom baseUrl ([#1](https://github.com/sirensolutions/esri-leaflet-vector/pull/1))
 * Added option to pass custom stylPath ([#1](https://github.com/sirensolutions/esri-leaflet-vector/pull/1))
+
+## [3.1.4] - 2022-08-12
+
+### Fixed
+
+* Added "Powered by Esri" when adding a layer via item ID for consistency ([#135](https://github.com/Esri/esri-leaflet-vector/pull/135))
 
 ## [3.1.3] - 2022-05-23
 
@@ -183,7 +189,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 * Initial Release
 
-[unreleased]: https://github.com/esri/esri-leaflet-vector/compare/v3.1.3...HEAD
+[unreleased]: https://github.com/esri/esri-leaflet-vector/compare/v3.1.4...HEAD
+[3.1.4]: https://github.com/esri/esri-leaflet-vector/compare/v3.1.3...v3.1.4
 [3.1.3]: https://github.com/esri/esri-leaflet-vector/compare/v3.1.2...v3.1.3
 [3.1.2]: https://github.com/esri/esri-leaflet-vector/compare/v3.1.0...v3.1.2
 [3.1.1]: https://github.com/esri/esri-leaflet-vector/compare/v3.1.0...v3.1.1

@@ -148,6 +148,12 @@ export var VectorTileLayer = Layer.extend({
 
   _asyncAdd: function () {
     var map = this._map;
+
+    // If the layer was removed, this._map will be null
+    if (map === null) {
+      return;
+    }
+
     this._mapboxGL.addTo(map, this);
   }
 });
