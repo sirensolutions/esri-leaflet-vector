@@ -5,7 +5,8 @@ import { mapboxGLJSLayer } from './MapBoxGLLayer';
 
 export var VectorBasemapLayer = Layer.extend({
   options: {
-    key: 'ArcGIS:Streets' // default style key enum if none provided
+    key: 'ArcGIS:Streets', // default style key enum if none provided,
+    zIndex: null // a custom zIndex for the layer container
   },
 
   /**
@@ -43,6 +44,17 @@ export var VectorBasemapLayer = Layer.extend({
     this._createLayer();
   },
 
+  getZIndex: function () {
+    return this.options.zIndex;
+  },
+
+  setZIndex: function (zIndex) {
+    this.options.zIndex = zIndex;
+    if (this._mapboxGL) {
+      this._mapboxGL.setZIndex(zIndex);
+    }
+  },
+
   /**
    * Creates the mapboxGLJSLayer given using "this.options"
    */
@@ -52,7 +64,8 @@ export var VectorBasemapLayer = Layer.extend({
     this._mapboxGL = mapboxGLJSLayer({
       style: styleUrl,
       pane: this.options.pane,
-      opacity: this.options.opacity
+      opacity: this.options.opacity,
+      zIndex: this.options.zIndex
     });
 
     this._ready = true;
@@ -181,6 +194,7 @@ export var VectorBasemapLayer = Layer.extend({
       return;
     }
     map.on('moveend', Util._updateMapAttribution);
+    this._mapboxGL.setZIndex(this.options.zIndex);
     this._mapboxGL.addTo(map, this);
   }
 });

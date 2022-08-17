@@ -18,7 +18,8 @@ export var MapboxGLJSLayer = Layer.extend({
     // whether or not to register the mouse and keyboard
     // events on the mapbox overlay
     interactive: false,
-    opacity: 1
+    opacity: 1,
+    zIndex: null
   },
 
   initialize: function (options) {
@@ -100,6 +101,17 @@ export var MapboxGLJSLayer = Layer.extend({
     this._container.style.opacity = opacity;
   },
 
+  getZIndex: function () {
+    return this.options.zIndex;
+  },
+
+  setZIndex: function (zIndex) {
+    this.options.zIndex = zIndex;
+    if (this._container) {
+      this._container.style.zIndex = zIndex;
+    }
+  },
+
   getBounds: function () {
     var halfSize = this.getSize().multiplyBy(0.5);
     var center = this._map.latLngToContainerPoint(this._map.getCenter());
@@ -125,6 +137,9 @@ export var MapboxGLJSLayer = Layer.extend({
     container.style.height = size.y + 'px';
     container.style.position = 'absolute';
     container.style.opacity = this.options.opacity;
+    if (this.options.zIndex) {
+      container.style.zIndex = this.options.zIndex;
+    }
     var topLeft = this._map.containerPointToLayerPoint([0, 0]).subtract(offset);
 
     DomUtil.setPosition(container, topLeft);
