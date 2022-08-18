@@ -1,4 +1,4 @@
-/* sirensolutions-esri-leaflet-vector - v3.1.4-siren-1 - Wed Aug 17 2022 13:49:01 GMT+0100 (British Summer Time)
+/* sirensolutions-esri-leaflet-vector - v3.1.4-siren-2 - Wed Aug 17 2022 21:37:29 GMT+0100 (British Summer Time)
  * Copyright (c) 2022 Environmental Systems Research Institute, Inc.
  * Apache-2.0 */
 (function (global, factory) {
@@ -11,7 +11,7 @@
 
   var mapboxgl__default = /*#__PURE__*/_interopDefaultLegacy(mapboxgl);
 
-  var version = "3.1.4-siren-1";
+  var version = "3.1.4-siren-2";
 
   /*
     utility to establish a URL for the basemap styles API
@@ -281,7 +281,8 @@
       // whether or not to register the mouse and keyboard
       // events on the mapbox overlay
       interactive: false,
-      opacity: 1
+      opacity: 1,
+      zIndex: null
     },
 
     initialize: function (options) {
@@ -363,6 +364,17 @@
       this._container.style.opacity = opacity;
     },
 
+    getZIndex: function () {
+      return this.options.zIndex;
+    },
+
+    setZIndex: function (zIndex) {
+      this.options.zIndex = zIndex;
+      if (this._container) {
+        this._container.style.zIndex = zIndex;
+      }
+    },
+
     getBounds: function () {
       var halfSize = this.getSize().multiplyBy(0.5);
       var center = this._map.latLngToContainerPoint(this._map.getCenter());
@@ -388,6 +400,9 @@
       container.style.height = size.y + 'px';
       container.style.position = 'absolute';
       container.style.opacity = this.options.opacity;
+      if (this.options.zIndex) {
+        container.style.zIndex = this.options.zIndex;
+      }
       var topLeft = this._map.containerPointToLayerPoint([0, 0]).subtract(offset);
 
       leaflet.DomUtil.setPosition(container, topLeft);
@@ -564,7 +579,8 @@
 
   var VectorBasemapLayer = leaflet.Layer.extend({
     options: {
-      key: 'ArcGIS:Streets' // default style key enum if none provided
+      key: 'ArcGIS:Streets', // default style key enum if none provided,
+      zIndex: null // a custom zIndex for the layer container
     },
 
     /**
@@ -602,6 +618,17 @@
       this._createLayer();
     },
 
+    getZIndex: function () {
+      return this.options.zIndex;
+    },
+
+    setZIndex: function (zIndex) {
+      this.options.zIndex = zIndex;
+      if (this._mapboxGL) {
+        this._mapboxGL.setZIndex(zIndex);
+      }
+    },
+
     /**
      * Creates the mapboxGLJSLayer given using "this.options"
      */
@@ -611,7 +638,8 @@
       this._mapboxGL = mapboxGLJSLayer({
         style: styleUrl,
         pane: this.options.pane,
-        opacity: this.options.opacity
+        opacity: this.options.opacity,
+        zIndex: this.options.zIndex
       });
 
       this._ready = true;
@@ -740,6 +768,7 @@
         return;
       }
       map.on('moveend', esriLeaflet.Util._updateMapAttribution);
+      this._mapboxGL.setZIndex(this.options.zIndex);
       this._mapboxGL.addTo(map, this);
     }
   });
@@ -764,7 +793,10 @@
       baseUrl: 'https://www.arcgis.com/sharing/rest/content/items',
 
       // if stylePath is not provided, default ArcGIS Online stylePath
-      stylePath: 'resources/styles/root.json'
+      stylePath: 'resources/styles/root.json',
+
+      // a custom zIndex of the layer container
+      zIndex: null
     },
 
     /**
@@ -801,6 +833,17 @@
 
       // this.options has been set, continue on to create the layer:
       this._createLayer();
+    },
+
+    getZIndex: function () {
+      return this.options.zIndex;
+    },
+
+    setZIndex: function (zIndex) {
+      this.options.zIndex = zIndex;
+      if (this._mapboxGL) {
+        this._mapboxGL.setZIndex(zIndex);
+      }
     },
 
     /**
@@ -861,7 +904,8 @@
           this._mapboxGL = mapboxGLJSLayer({
             style: style,
             pane: this.options.pane,
-            opacity: this.options.opacity
+            opacity: this.options.opacity,
+            zIndex: this.options.zIndex
           });
 
           this._ready = true;
@@ -900,6 +944,7 @@
         return;
       }
 
+      this._mapboxGL.setZIndex(this.options.zIndex);
       this._mapboxGL.addTo(map, this);
     }
   });

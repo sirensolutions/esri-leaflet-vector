@@ -3,14 +3,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Upcoming changes][unreleased]
+## [3.1.4-siren-2] - 2022-08-17
 
-## [3.1.4-siren-1] - 2022-08-03
+### Added
 
-### Fixed
+* Added zIndex option, setters and getters to vector layers ([#6](https://github.com/sirensolutions/esri-leaflet-vector/pull/6))
+
+## [3.1.4-siren-1] - 2022-08-17
+
+### Added
 * Added option to handle errors from improperly written ids ([#1](https://github.com/sirensolutions/esri-leaflet-vector/pull/1))
 * Added option to pass custom baseUrl ([#1](https://github.com/sirensolutions/esri-leaflet-vector/pull/1))
 * Added option to pass custom stylPath ([#1](https://github.com/sirensolutions/esri-leaflet-vector/pull/1))
+
+### Fixed
+
+* Check that the map is not null when adding a layer asynchronously ([#5](https://github.com/sirensolutions/esri-leaflet-vector/pull/5))
 
 ## [3.1.4] - 2022-08-12
 

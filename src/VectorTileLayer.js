@@ -18,7 +18,10 @@ export var VectorTileLayer = Layer.extend({
     baseUrl: 'https://www.arcgis.com/sharing/rest/content/items',
 
     // if stylePath is not provided, default ArcGIS Online stylePath
-    stylePath: 'resources/styles/root.json'
+    stylePath: 'resources/styles/root.json',
+
+    // a custom zIndex of the layer container
+    zIndex: null
   },
 
   /**
@@ -55,6 +58,17 @@ export var VectorTileLayer = Layer.extend({
 
     // this.options has been set, continue on to create the layer:
     this._createLayer();
+  },
+
+  getZIndex: function () {
+    return this.options.zIndex;
+  },
+
+  setZIndex: function (zIndex) {
+    this.options.zIndex = zIndex;
+    if (this._mapboxGL) {
+      this._mapboxGL.setZIndex(zIndex);
+    }
   },
 
   /**
@@ -115,7 +129,8 @@ export var VectorTileLayer = Layer.extend({
         this._mapboxGL = mapboxGLJSLayer({
           style: style,
           pane: this.options.pane,
-          opacity: this.options.opacity
+          opacity: this.options.opacity,
+          zIndex: this.options.zIndex
         });
 
         this._ready = true;
@@ -154,6 +169,7 @@ export var VectorTileLayer = Layer.extend({
       return;
     }
 
+    this._mapboxGL.setZIndex(this.options.zIndex);
     this._mapboxGL.addTo(map, this);
   }
 });
